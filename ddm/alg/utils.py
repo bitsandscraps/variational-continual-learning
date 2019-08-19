@@ -1,8 +1,9 @@
 import numpy as np
-import matplotlib
-matplotlib.use('agg')
-import matplotlib.pyplot as plt
-from cla_models_multihead import MFVI_NN
+# import matplotlib
+# matplotlib.use('agg')
+# import matplotlib.pyplot as plt
+from ddm.alg.cla_models_multihead import MFVI_NN
+
 
 def merge_coresets(x_coresets, y_coresets):
     merged_x, merged_y = x_coresets[0], y_coresets[0]
@@ -10,6 +11,7 @@ def merge_coresets(x_coresets, y_coresets):
         merged_x = np.vstack((merged_x, x_coresets[i]))
         merged_y = np.vstack((merged_y, y_coresets[i]))
     return merged_x, merged_y
+
 
 def get_scores(model, x_testsets, y_testsets, x_coresets, y_coresets, hidden_size, no_epochs, single_head, batch_size=None):
     mf_weights, mf_variances = model.get_weights()
@@ -52,6 +54,7 @@ def get_scores(model, x_testsets, y_testsets, x_coresets, y_coresets, hidden_siz
 
     return acc
 
+
 def concatenate_results(score, all_score):
     if all_score.size == 0:
         all_score = np.reshape(score, (1,-1))
@@ -62,9 +65,10 @@ def concatenate_results(score, all_score):
         all_score = np.vstack((new_arr, score))
     return all_score
 
-def plot(filename, vcl, rand_vcl, kcen_vcl):
-    plt.rc('text', usetex=True)
-    plt.rc('font', family='serif')
+
+# def plot(filename, vcl, rand_vcl, kcen_vcl):
+#     plt.rc('text', usetex=True)
+#     plt.rc('font', family='serif')
 
     fig = plt.figure(figsize=(7,3))
     ax = plt.gca()

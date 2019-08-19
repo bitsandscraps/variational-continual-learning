@@ -1,7 +1,7 @@
 import numpy as np
-import tensorflow as tf
-import utils
-from cla_models_multihead import Vanilla_NN, MFVI_NN
+from ddm.alg import utils
+from ddm.alg.cla_models_multihead import Vanilla_NN, MFVI_NN
+
 
 def run_vcl(hidden_size, no_epochs, data_gen, coreset_method, coreset_size=0, batch_size=None, single_head=True):
     in_dim, out_dim = data_gen.get_dims()
@@ -11,7 +11,7 @@ def run_vcl(hidden_size, no_epochs, data_gen, coreset_method, coreset_size=0, ba
     all_acc = np.array([])
 
     for task_id in range(data_gen.max_iter):
-        x_train, y_train, x_test, y_test = data_gen.next_task()
+        x_train, y_train, _, _, x_test, y_test = data_gen.next_task()
         x_testsets.append(x_test)
         y_testsets.append(y_test)
 

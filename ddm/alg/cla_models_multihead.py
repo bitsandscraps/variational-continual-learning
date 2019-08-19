@@ -3,7 +3,7 @@ import numpy as np
 from copy import deepcopy
 
 np.random.seed(0)
-tf.set_random_seed(0)
+tf.compat.v1.set_random_seed(0)
 
 # variable initialization functions
 def weight_variable(shape, init_weights=None):
